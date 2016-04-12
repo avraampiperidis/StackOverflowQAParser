@@ -18,16 +18,42 @@ from https://github.com/zeronerone/StackOverflowQAParser/blob/master/src/main/ja
 <br>
 the basic idea and flow
 <br>
+Create two model classes and implement their interfaces
 ```java
+import com.protectsoft.QuestionInter;
+import com.protectsoft.StackQuestionModel;
+
+//user class must implement QuestionInter
+public class MyQuestionModel implements QuestionInter {
+	
+	private List<StackQuestionModel> qmodels;
+	
+	public MyQuestionModel() {
+	}
+
+	@Override
+	public List<StackQuestionModel> getQuestions() {
+		return qmodels;
+	}
+
+	@Override
+	public void setStackQuestionModel(List<StackQuestionModel> qmodels) {
+		this.qmodels = qmodels;
+	}
+
+}
+
+
 //|---------->>Synchronous way example<<------------------------------------||
 //execute in main thread till results are ready
-Question<QuestionModel> qmodel = new Question<QuestionModel>(new QuestionModel());
+Question<MyQuestionModel> qmodel = new Question<MyQuestionModel>(new MyQuestionModel());
 
 String questionString = "how to sort objects";//the question string		
-QuestionModel synmodel = qmodel.setQuestion(questionString)
+MyQuestionModel synmodel = qmodel.setQuestion(questionString)
 	.setLang(Lang.JAVA)
 	.getQuestionResultSet();
 			
+	//synmodel is filled with data		
 	for(int i =0; i < synmodel.getQuestions().size(); i++) {
 		System.out.println("from Syn"+synmodel.getQuestions().get(i).getTitle());
 		System.out.println("from Syn"+synmodel.getQuestions().get(i).getUrl());
@@ -38,9 +64,9 @@ QuestionModel synmodel = qmodel.setQuestion(questionString)
 //
 //		
 //|------------->>Asynchronous way example<<------------------------------------||
-Question<QuestionModel> qmodeltest = new Question<QuestionModel>(new QuestionModel());
+Question<MyQuestionModel> qmodeltest = new Question<MyQuestionModel>(new MyQuestionModel());
 			
-final QuestionModel model = qmodeltest.getModel();
+final MyQuestionModel model = qmodeltest.getModel();
 			
 //the query will be executed in another thread
 //AsynExecAdapters run method will be called whene the results are ready
@@ -74,7 +100,9 @@ Answer<AnswerModel> answer = new Answer<AnswerModel>(new AnswerModel());
 						//the questionset
 						//model.getQuestions().get(0)	
 AnswerModel mymodel = answer.getAnswersForQuestionURL(model.getQuestions().get(0));
-		
+
+//mymodel is filled with data		
+//for this question print all its answers ,code and text(summary/explanation)
 for(int i =0; i < mymodel.getAnswers().size(); i++) {
 	System.out.println(mymodel.getAnswers().get(i).getCode());
 	System.out.println(mymodel.getAnswers().get(i).getText());
@@ -94,10 +122,15 @@ answer.with(model.getQuestions().get(0))
 		public void run() {
 		//fill the model
 		fillModel(anmodel);
+		
+		//print the questions title and the url
 		System.out.println(anmodel.getTitle());
 		System.out.println(anmodel.getUrl());
+		
+		//for this question print all its answers ,code and text(summary/explanation)
 		for(int i =0; i < anmodel.getAnswers().size(); i++) {
 			System.out.println(anmodel.getAnswers().get(i).getCode());
+			System.out.println(anmodel.getAnswers().get(i).getText());
 		}
 						
 	}});
