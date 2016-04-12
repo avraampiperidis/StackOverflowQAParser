@@ -19,9 +19,10 @@ from https://github.com/zeronerone/StackOverflowQAParser/blob/master/src/main/ja
 the basic idea and flow
 <br>
 ```java
-//|---------->>synchronous way example<<------------------------------------||
-//main thread will be block and wait till results are ready
+//|---------->>Synchronous way example<<------------------------------------||
+//execute in main thread till results are ready
 Question<QuestionModel> qmodel = new Question<QuestionModel>(new QuestionModel());
+
 		
 QuestionModel synmodel = qmodel.setQuestion("linked list sort")
 	.setLang(Lang.JAVA)
@@ -36,7 +37,7 @@ QuestionModel synmodel = qmodel.setQuestion("linked list sort")
 
 //
 //		
-//|------------->>asynchronous way example<<------------------------------------||
+//|------------->>Asynchronous way example<<------------------------------------||
 Question<QuestionModel> qmodeltest = new Question<QuestionModel>(new QuestionModel());
 			
 final QuestionModel model = qmodeltest.getModel();
