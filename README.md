@@ -16,10 +16,10 @@ I havent wrote any test yet..i'll write when i have some time
 <br>
 from https://github.com/zeronerone/StackOverflowQAParser/blob/master/src/main/java/testlib/Test.java
 <br>
-for the basic idea and flow
+the basic idea and flow
 <br>
 ```java
-//synchronous way example
+//|---------->>synchronous way example<<------------------------------------||
 //main thread will be block and wait till results are ready
 Question<QuestionModel> qmodel = new Question<QuestionModel>(new QuestionModel());
 		
@@ -33,10 +33,10 @@ QuestionModel synmodel = qmodel.setQuestion("linked list sort")
 		System.out.println("from Syn"+synmodel.getQuestions().get(i).getNumOfAnswers());
 	}
 			
-//wait 2 sec for test 
-Thread.sleep(2000);
-		
-//asynchronous way example
+
+//
+//		
+//|------------->>asynchronous way example<<------------------------------------||
 Question<QuestionModel> qmodeltest = new Question<QuestionModel>(new QuestionModel());
 			
 final QuestionModel model = qmodeltest.getModel();
@@ -64,12 +64,9 @@ qmodeltest.setQuestion("sort objects")
 		}
 	);
 			
-			
-//wait 2 sec for results 
-Thread.sleep(2000);		
 		
-//get answers for a spicific question
-//Syn way
+//|--->get answers for a spicific question<-------------------------------||
+//|--->Synchronous way<---------------------------------------------------||
 Answer<AnswerModel> answer = new Answer<AnswerModel>(new AnswerModel());
 		
 AnswerModel mymodel = answer.getAnswersForQuestionURL(model.getQuestions().get(0));
@@ -81,8 +78,8 @@ for(int i =0; i < mymodel.getAnswers().size(); i++) {
 				
 	
 		
-//get answers for a spicific question
-//Asyn way
+//|--->get answers for a spicific question<-------------------------------||
+//|--->Asynchronous way<---------------------------------------------------||
 answer = new Answer<AnswerModel>(new AnswerModel());
 		 
 final AnswerModel anmodel = answer.getModel();
