@@ -14,6 +14,6 @@ and it would be prety cool to see this in python..some day
 I havent wrote any test yet..i'll write when i have some time
 <br>
 <br>
-Check https://github.com/zeronerone/StackOverflowQAParser/blob/master/src/main/java/com/protectsoft/Test.java
+Check https://github.com/zeronerone/StackOverflowQAParser/blob/master/src/main/java/testlib/Test.java
 <br>
 for the basic idea and flow
