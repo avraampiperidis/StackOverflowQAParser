@@ -18,7 +18,10 @@ from https://github.com/zeronerone/StackOverflowQAParser/blob/master/src/main/ja
 <br>
 the basic idea and flow
 <br>
+<br>
 Create two model classes and implement their interfaces
+<br>
+MyQuestionModel must implement QuestionInter
 ```java
 import com.protectsoft.QuestionInter;
 import com.protectsoft.StackQuestionModel;
@@ -42,7 +45,8 @@ public class MyQuestionModel implements QuestionInter {
 	}
 
 }
-
+```
+```java
 
 //|---------->>Synchronous way example<<------------------------------------||
 //execute in main thread till results are ready
