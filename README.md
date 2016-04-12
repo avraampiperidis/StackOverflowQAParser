@@ -9,3 +9,6 @@ Choose up to two ways to get answers.<br>
 I just started this project and its just for fun/learning/exercise.<br>
 In the future i will make it in c#,<br>
 and it would be prety cool to see this in python..some day
+<br>
+<br>
+I havent wrote any test yet..i'll write when i have some time
