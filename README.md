@@ -23,8 +23,8 @@ the basic idea and flow
 //execute in main thread till results are ready
 Question<QuestionModel> qmodel = new Question<QuestionModel>(new QuestionModel());
 
-		
-QuestionModel synmodel = qmodel.setQuestion("linked list sort")
+String questionString = "how to sort objects";//the question string		
+QuestionModel synmodel = qmodel.setQuestion(questionString)
 	.setLang(Lang.JAVA)
 	.getQuestionResultSet();
 			
@@ -43,9 +43,9 @@ Question<QuestionModel> qmodeltest = new Question<QuestionModel>(new QuestionMod
 final QuestionModel model = qmodeltest.getModel();
 			
 //the query will be executed in another thread
-//main thread is not blocking
-//when read run() would be called
-qmodeltest.setQuestion("sort objects")
+//AsynExecAdapters run method will be called whene the results are ready
+String questionString = "how to cast objects";//the question string
+qmodeltest.setQuestion(questionString)
 	.setLang(Lang.JAVA)
 	.asynQuestionResultSet(new AsynExecAdapter(){
 
@@ -69,7 +69,10 @@ qmodeltest.setQuestion("sort objects")
 //|--->get answers for a spicific question<-------------------------------||
 //|--->Synchronous way<---------------------------------------------------||
 Answer<AnswerModel> answer = new Answer<AnswerModel>(new AnswerModel());
-		
+						//
+						//get the first question object from 	
+						//the questionset
+						//model.getQuestions().get(0)	
 AnswerModel mymodel = answer.getAnswersForQuestionURL(model.getQuestions().get(0));
 		
 for(int i =0; i < mymodel.getAnswers().size(); i++) {
