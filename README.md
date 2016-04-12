@@ -28,7 +28,7 @@ import com.protectsoft.StackQuestionModel;
 
 //user class must implement QuestionInter
 public class MyQuestionModel implements QuestionInter {
-	
+	//create this variable so it can be set and get from the overrided methods
 	private List<StackQuestionModel> qmodels;
 	
 	public MyQuestionModel() {
@@ -46,10 +46,64 @@ public class MyQuestionModel implements QuestionInter {
 
 }
 ```
+And this class MyAnswerModel implements AnswerInter
 ```java
+import com.protectsoft.AnswerInter;
+import com.protectsoft.StackAnswerModel.AnswerText;
+import com.protectsoft.StackAnswerModel.QuestionText;
 
+//user model class implementing AnswerInter
+public class AnswerModel implements AnswerInter {
+	//create this variables so it can be set and get from the overrided methods
+	private String url;
+	private String title;
+	private QuestionText questiontext;
+	private List<AnswerText> answers;
+	
+	public AnswerModel() {
+		
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String t) {
+		this.title = t;
+	}
+
+	public QuestionText getQuestionText() {
+		return questiontext;
+	}
+
+	public void setQuestionText(QuestionText qt) {
+		questiontext = qt;
+	}
+
+	public List<AnswerText> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(List<AnswerText> answers) {
+		this.answers = answers;
+	}
+
+}
+```
+
+And the test... 
+```java
 //|---------->>Synchronous way example<<------------------------------------||
 //execute in main thread till results are ready
+//
 Question<MyQuestionModel> qmodel = new Question<MyQuestionModel>(new MyQuestionModel());
 
 String questionString = "how to sort objects";//the question string		
