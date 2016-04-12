@@ -9,9 +9,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public final class Utils {
+public  class Utils {
 	
-	public Utils() {}
 	
 	public static List<StackQuestionModel> getQuestions(String url) throws IOException {
 
@@ -87,11 +86,17 @@ public final class Utils {
 
 
 
-    public static StackAnswerModel getAnswerForQuestion(StackQuestionModel question,String url) throws IOException {
+    public static StackAnswerModel getAnswerForQuestion(StackQuestionModel question) throws IOException {
+    	
+    	final String url = question.getUrl();
 
         StackAnswerModel stackAnswerModel = new StackAnswerModel();
 
-        Document doc = Jsoup.connect(url).get();
+        Document doc = Jsoup.connect(url).data("query", "Java")
+      		  .userAgent("Mozilla")
+      		  .cookie("auth", "token")
+      		  .timeout(3000)
+      		  .post();
 
         Element element = doc.select("div.question").first();
         Element element1 = element.select("div.post-text").first();

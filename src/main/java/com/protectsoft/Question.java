@@ -44,8 +44,8 @@ public class Question<T extends QuestionInter> {
 	}
 	
 	
-	@SuppressWarnings("unchecked")
-	public void asynQuestionResultSet(@SuppressWarnings("rawtypes") final AsynExecAdapter runnable) throws InterruptedException {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void asynQuestionResultSet( final AsynExecAdapter runnable) throws InterruptedException {
 		
 		Thread th;
 		th = new Thread(new Runnable(){
@@ -65,7 +65,7 @@ public class Question<T extends QuestionInter> {
 				}
 				
 			}});
-		runnable.setModel(t);
+		runnable.setQModel(t);
 		th.start();		
 	}
 	
@@ -81,7 +81,8 @@ public class Question<T extends QuestionInter> {
 	}
 	
 	
-	 private class SyncBuilder<T extends QuestionInter> {
+	 @SuppressWarnings("hiding")
+	private class SyncBuilder<T extends QuestionInter> {
 		
 		private  T t;
 		
