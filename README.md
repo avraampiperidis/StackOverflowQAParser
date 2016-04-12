@@ -7,4 +7,5 @@ Choose up to two ways to get answers.<br>
 2)asynchronous call (execute in other thread and Runnable will be called when results are ready).<br>
 <br>
 I just started this project and its just for fun/learning/exercise.<br>
-In the future i will make it in c#.
+In the future i will make it in c#,<br>
+and it would be prety cool to see this in python..
