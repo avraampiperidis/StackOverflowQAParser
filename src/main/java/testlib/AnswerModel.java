@@ -18,34 +18,42 @@ public class AnswerModel implements AnswerInter {
 		
 	}
 
+	@Override
 	public String getUrl() {
 		return url;
 	}
 
+	@Override
 	public void setUrl(String url) {
 		this.url = url;
 	}
 
+	@Override
 	public String getTitle() {
 		return title;
 	}
 
+	@Override
 	public void setTitle(String t) {
 		this.title = t;
 	}
 
+	@Override
 	public QuestionText getQuestionText() {
 		return questiontext;
 	}
 
+	@Override
 	public void setQuestionText(QuestionText qt) {
 		questiontext = qt;
 	}
 
+	@Override
 	public List<AnswerText> getAnswers() {
 		return answers;
 	}
 
+	@Override
 	public void setAnswers(List<AnswerText> answers) {
 		this.answers = answers;
 	}
