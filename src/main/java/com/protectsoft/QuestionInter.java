@@ -8,5 +8,4 @@ public interface QuestionInter {
 	
 	public void setStackQuestionModel(List<StackQuestionModel> qmodels);
 	
-
 }

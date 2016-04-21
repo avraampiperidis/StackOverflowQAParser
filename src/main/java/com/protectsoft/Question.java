@@ -3,10 +3,9 @@ package com.protectsoft;
 import java.io.IOException;
 import java.util.List;
 
+
 public class Question<T extends QuestionInter> {
-	
-	static final String URL = "http://stackoverflow.com/search?q=[java]+";
-	
+		
 	private Thread thread;
 	private String question;
 	private Lang lang;
@@ -36,6 +35,9 @@ public class Question<T extends QuestionInter> {
 		return this;
 	}
 	
+	public Lang getLang() {
+		return lang;
+	}
 	
 	
 	@SuppressWarnings({ "unchecked", "hiding" })
@@ -52,8 +54,8 @@ public class Question<T extends QuestionInter> {
 
 			public void run() {
 				try {
-					String url = URL + Utils.questionBuilder(getQuestion());
-					List<StackQuestionModel> qmodels = Utils.getQuestions(url);
+					String url = urlBuilder() + Utils.questionBuilder(getQuestion());
+					List<StackQuestionModel> qmodels = Utils.getSingleton().getQuestions(url);
 					
 					runnable.setQuestionModels(qmodels);
 					
@@ -70,9 +72,6 @@ public class Question<T extends QuestionInter> {
 	}
 	
 	
-	public int getNumOfAnswers() {
-		return 0;
-	}
 	
 	
 	@SuppressWarnings({ "hiding", "unchecked" })
@@ -95,14 +94,20 @@ public class Question<T extends QuestionInter> {
 		}
 
 		private  T build() throws IOException {
-			String url = URL + Utils.questionBuilder(getQuestion());
-			List<StackQuestionModel> qmodels = Utils.getQuestions(url);
+			String url = urlBuilder() + Utils.questionBuilder(getQuestion());
+			List<StackQuestionModel> qmodels = Utils.getSingleton().getQuestions(url);
 			
 			t.setStackQuestionModel(qmodels);
 			return t;
 		}
 		
 	}
+	 
+	 
+	 
+	 private final String urlBuilder() {
+		 return "http://stackoverflow.com/search?q=["+this.lang.toString()+"]+";
+	 }
 	
 
 }

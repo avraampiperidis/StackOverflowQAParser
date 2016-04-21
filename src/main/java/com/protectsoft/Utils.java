@@ -3,6 +3,7 @@ package com.protectsoft;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -11,9 +12,29 @@ import org.jsoup.select.Elements;
 
 public  class Utils {
 	
+	//prevent default initialization
+	private Utils() {}
 	
-	public static List<StackQuestionModel> getQuestions(String url) throws IOException {
-
+	private static Logger log = Logger.getLogger(Utils.class.getName());
+		
+	private static volatile Utils singleton;
+	
+	
+	public static Utils getSingleton() {
+		if(singleton == null) {
+			synchronized(Utils.class) {
+				if(singleton == null) {
+					singleton = new Utils();
+				}
+			}
+		}
+		return singleton;
+	}
+	
+	
+	
+	public   List<StackQuestionModel> getQuestions(String url) throws IOException {
+		
         List<StackQuestionModel> questions = new ArrayList<StackQuestionModel>();
 
         Document doc = Jsoup.connect(url).data("query", "Java")
@@ -21,7 +42,7 @@ public  class Utils {
         		  .cookie("auth", "token")
         		  .timeout(3000)
         		  .post();
-
+       
         Elements elements = doc.select("div[data-position]");
 
         for(Element e : elements) {
@@ -29,9 +50,9 @@ public  class Utils {
             StackQuestionModel stackAnswer = new StackQuestionModel();
 
             Element q =  e.select("div.status.answered-accepted").first();
-
+            
             if(q != null) {
-
+            	
                 try {
                     int num = Integer.parseInt(q.getElementsByTag("strong").text());
                     stackAnswer.setNumOfAnswers(num);
@@ -44,7 +65,7 @@ public  class Utils {
 
                         stackAnswer.setUrl(link);
                         stackAnswer.setTitle(title);
-
+                       
                         questions.add(stackAnswer);
                     }
 
@@ -80,15 +101,14 @@ public  class Utils {
             }
 
         }
-
         return questions;
     }
 
 
 
-    public static StackAnswerModel getAnswerForQuestion(StackQuestionModel question) throws IOException {
-    	
-    	final String url = question.getUrl();
+    public <T> StackAnswerModel  getAnswerForQuestion(T q) throws IOException {
+    
+    	final String url = ((StackQuestionModel) q).getUrl();
 
         StackAnswerModel stackAnswerModel = new StackAnswerModel();
 
@@ -104,8 +124,8 @@ public  class Utils {
         Elements paragraphs = element1.select("p");
         Elements codes = element1.select("code");
 
-        stackAnswerModel.setUrl(question.getUrl());
-        stackAnswerModel.setTitle(question.getTitle());
+        stackAnswerModel.setUrl(((StackQuestionModel) q).getUrl());
+        stackAnswerModel.setTitle(((StackQuestionModel) q).getTitle());
 
         String paragraphText = "";
         for(Element e : paragraphs) {
@@ -130,7 +150,7 @@ public  class Utils {
 
         try {
 
-            for (int i = 0; i < question.getNumOfAnswers(); i++) {
+            for (int i = 0; i < ((StackQuestionModel) q).getNumOfAnswers(); i++) {
 
                 Element element2 = doc.select("div.answer").get(i);
                 Element element3 = element2.select("div.post-text").first();
@@ -151,7 +171,7 @@ public  class Utils {
                 StackAnswerModel.AnswerText answerText = new StackAnswerModel.AnswerText();
                 answerText.setCode(codetext);
                 answerText.setText(paragraphText);
-                answerText.setUrl(question.getUrl());
+                answerText.setUrl(((StackQuestionModel) q).getUrl());
 
                 answerTexts.add(answerText);
             }
@@ -172,5 +192,7 @@ public  class Utils {
         String res = s.replace(" ","+");
         return res;
     }
+    
+    
 
 }

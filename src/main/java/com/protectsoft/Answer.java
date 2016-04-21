@@ -44,7 +44,7 @@ public class Answer<T extends AnswerInter> {
 
 			public void run() {
 				try {
-					StackAnswerModel stackmodel = Utils.getAnswerForQuestion(getQmodel());
+					StackAnswerModel stackmodel = Utils.getSingleton().getAnswerForQuestion(getQmodel()); //Utils.getAnswerForQuestion(getQmodel());
 					runnable.setStackAnswerModel(stackmodel);
 					
 					thread = new Thread(runnable);
@@ -78,9 +78,11 @@ public class Answer<T extends AnswerInter> {
 				this.stqm = stqm;
 			}
 
+			
 			private  T build() throws IOException {
+				Utils utils = Utils.getSingleton();
 				
-				StackAnswerModel stmodel = Utils.getAnswerForQuestion(stqm);
+				StackAnswerModel stmodel = utils.getAnswerForQuestion(stqm);
 			    t.setAnswers(stmodel.getCodeAnswers());
 			    t.setQuestionText(stmodel.getQuestionText());
 			    t.setTitle(stmodel.getTitle());

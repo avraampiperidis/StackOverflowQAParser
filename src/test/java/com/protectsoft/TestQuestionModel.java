@@ -1,4 +1,4 @@
-package testlib;
+package com.protectsoft;
 
 import java.util.List;
 
@@ -6,11 +6,11 @@ import com.protectsoft.QuestionInter;
 import com.protectsoft.StackQuestionModel;
 
 //user class must implement QuestionInter
-public class QuestionModel implements QuestionInter {
+public class TestQuestionModel implements QuestionInter {
 	
 	private List<StackQuestionModel> qmodels;
 	
-	public QuestionModel() {
+	public TestQuestionModel() {
 	}
 
 	
