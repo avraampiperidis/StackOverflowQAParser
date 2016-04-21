@@ -12,11 +12,6 @@ In the future i will make it in c#,<br>
 and it would be prety cool to see this in python..some day
 <br>
 <br>
-I havent wrote any test yet..i'll write when i have some time
-<br>
-<br>
-from https://github.com/zeronerone/StackOverflowQAParser/blob/master/src/main/java/testlib/Test.java
-<br>
 the basic idea and flow
 <br>
 <br>
